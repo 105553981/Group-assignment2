@@ -87,7 +87,7 @@ include_once("header.inc");
         <p>USD 130,000 – 170,000 per year</p>
         <p>Contact our HR Department at: <a href="mailto:105707403@student.swin.edu.au">105707403@student.swin.edu.au</a></p>
         <div class="apply-link-button">
-          <p class="colortext-button"><a href="apply.html">Apply Now</a></p>
+          <p class="colortext-button"><a href="apply.php">Apply Now</a></p>
         </div>
       </aside>
         <p><strong>Brief Description of the Position:</strong>
@@ -133,7 +133,7 @@ include_once("header.inc");
         <p>USD 95,000 – 130,000 per year</p>
         <p>Contact our HR Department at: <a href="mailto:105707403@student.swin.edu.au">105707403@student.swin.edu.au</a></p>
         <div class="apply-link-button">
-          <p class="colortext-button"><a href="apply.html">Apply Now</a></p>
+          <p class="colortext-button"><a href="apply.php">Apply Now</a></p>
         </div>
           </aside>
           <p><strong>Job Reference Number: SE358</strong></p>
@@ -180,7 +180,7 @@ include_once("header.inc");
         <p>USD 110,000 – 140,000 per year</p>
         <p>Contact our HR Department at: <a href="mailto:105707403@student.swin.edu.au">105707403@student.swin.edu.au</a></p>
         <div class="apply-link-button">
-          <p class="colortext-button"><a href="apply.html">Apply Now</a></p>
+          <p class="colortext-button"><a href="apply.php">Apply Now</a></p>
         </div>
           </aside>
           <p><strong>Job Reference Number: SE490</strong></p>
@@ -226,7 +226,7 @@ include_once("header.inc");
         <p>USD 110,000 – 140,000 per year</p>
         <p>Contact our HR Department at: <a href="mailto:105707403@student.swin.edu.au">105707403@student.swin.edu.au</a></p>
         <div class="apply-link-button">
-          <p class="colortext-button"><a href="apply.html">Apply Now</a></p>
+          <p class="colortext-button"><a href="apply.php">Apply Now</a></p>
         </div>
           </aside>
           <p><strong>Job Reference Number: IS511</strong></p>
@@ -271,7 +271,7 @@ include_once("header.inc");
         <p>USD 115,000 – 150,000 per year</p>
         <p>Contact our HR Department at: <a href="mailto:105707403@student.swin.edu.au">105707403@student.swin.edu.au</a></p>
         <div class="apply-link-button">
-          <p class="colortext-button"><a href="apply.html">Apply Now</a></p>
+          <p class="colortext-button"><a href="apply.php">Apply Now</a></p>
         </div>
           </aside>
           <p><strong>Job Reference Number: AI582</strong></p>
@@ -317,7 +317,7 @@ include_once("header.inc");
         <p>USD 20 – 30 per hour</p>
         <p>Contact our HR Department at: <a href="mailto:105707403@student.swin.edu.au">105707403@student.swin.edu.au</a></p>
         <div class="apply-link-button">
-          <p class="colortext-button"><a href="apply.html">Apply Now</a></p>
+          <p class="colortext-button"><a href="apply.php">Apply Now</a></p>
         </div>
           </aside>
           <p><strong>Job Reference Number: HI689</strong></p>
@@ -352,5 +352,5 @@ include_once("header.inc");
 </body>
 </html>
 <?php
-include_once("footer.inc"); 
+include_once("footer.inc");
 ?>

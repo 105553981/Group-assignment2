@@ -162,7 +162,7 @@ if (!empty($errors)) {
 // === KHÔNG CÓ LỖI: TIẾN HÀNH LƯU VÀO CSDL ===
 
 // Kết nối CSDL
-$conn = @mysqli_connect($host, $user, $pwd, $sql_db);
+$conn = @mysqli_connect($host, $user, $pwd, $db);
 
 if (!$conn) {
   // Lỗi kết nối CSDL

@@ -71,17 +71,17 @@ function is_selected($field, $value)
       <hr class="end-line-heading">
       <label for="ref-number" class="highlight"><strong>Position you are applying for</strong></label>
       <select class="ref-number" name="ref-number" id="ref-number">
-        <option value="select" <?php echo is_selected('ref-number', 'select'); ?>>Job Reference Number</option>
-        <option value="0836" <?php echo is_selected('ref-number', '0836'); ?>>ML183 - Senior Machine Learning Engineer
+        <option value="select" <?php echo is_selected('ref-number', value: 'select'); ?>>Job Reference Number</option>
+        <option value="ML183" <?php echo is_selected('ref-number', 'ML183'); ?>>ML183 - Senior Machine Learning Engineer
         </option>
-        <option value="1297" <?php echo is_selected('ref-number', '1297'); ?>>SE358 - Full-Stack Software Engineer
+        <option value="SE358" <?php echo is_selected('ref-number', 'SE358'); ?>>SE358 - Full-Stack Software Engineer
         </option>
-        <option value="2391" <?php echo is_selected('ref-number', '2391'); ?>>SE490 - Software Engineer - SoC Power
+        <option value="SE490" <?php echo is_selected('ref-number', 'SE490'); ?>>SE490 - Software Engineer - SoC Power
           Management</option>
-        <option value="3337" <?php echo is_selected('ref-number', '3337'); ?>>IS511 - Systems Software Engineer,
+        <option value="IS511" <?php echo is_selected('ref-number', 'IS511'); ?>>IS511 - Systems Software Engineer,
           Information Security</option>
-        <option value="3569" <?php echo is_selected('ref-number', '3569'); ?>>AI582 - AI Product Manager</option>
-        <option value="4998" <?php echo is_selected('ref-number', '4998'); ?>>HI689 - Hardware Technology Internships
+        <option value="AI582" <?php echo is_selected('ref-number', 'AI582'); ?>>AI582 - AI Product Manager</option>
+        <option value="HI689" <?php echo is_selected('ref-number', 'HI689'); ?>>HI689 - Hardware Technology Internships
         </option>
       </select>
 
