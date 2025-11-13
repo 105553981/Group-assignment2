@@ -18,7 +18,7 @@ font, and spacing for both desktop and mobile. */
 }
 
 .logo-nav img {
-  width: 150px;
+  width: 200px;
   height: auto;
   display: block;
 }
@@ -378,6 +378,7 @@ font, and spacing for both desktop and mobile. */
   height: 30px;
   transition: transform 0.3s ease, opacity 0.3s ease;
 }
+
 
 .appicons img:hover {
   transform: scale(1.2);
