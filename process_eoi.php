@@ -148,8 +148,8 @@ if (empty($data['phone-number'])) {
 $data['skills'] = $_POST['skills'] ?? [];
 $data['other-skills'] = sanitize_input($_POST['other-skills'] ?? '');
 
-if (empty($data['skills']) && empty($data['other-skills'])) {
-  $errors[] = "You must select at least one skill or provide other skills.";
+if (empty($data['skills'])) {
+  $errors[] = "You must select at least one skill other skills.";
 }
 
 // === KẾT THÚC VALIDATION ===

@@ -1,10 +1,8 @@
 <footer class="logo-and-appicons">
-  <div>
     <p><strong>Download the App</strong>
       <img src="../Group-assignment2/../Group-assignment2/images/android-brands-solid.svg" alt="Android"></img>
       <img src="../Group-assignment2/images/apple-brands-solid.svg" alt="Apple"></img>
     </p>
-  </div>
 
     <div class="appicons">
       <a

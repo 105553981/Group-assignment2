@@ -1006,3 +1006,7 @@ body {
     padding: 0;
   }
 }
+
+.manage_job_ref{
+  display: flex;
+}
