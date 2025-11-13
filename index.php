@@ -43,7 +43,7 @@ include_once"header.inc"
       <img class="banner2" src="images/Banner2.png" alt="Hiring Banner">
     </div>
     <div id="start-button">
-      <p class="colortext-button"><a href="jobs.html">Get Started</a></p>
+      <p class="colortext-button"><a href="jobs.php">Get Started</a></p>
     </div>
     <hr class="end-line">
   </section>
@@ -147,7 +147,7 @@ include_once"header.inc"
 
   </div>
   <div id="apply-button">
-    <p class="colortext-button"><a href="apply.html">Apply Now</a></p>
+    <p class="colortext-button"><a href="apply.php">Apply Now</a></p>
   </div>
 
   <div class="h2">

@@ -1,4 +1,7 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 session_start(); // Bắt đầu session để gửi lỗi về apply.php
 
 // Yêu cầu A4: Không cho phép truy cập trực tiếp
@@ -170,30 +173,30 @@ if (!$conn) {
   exit();
 }
 
-// Yêu cầu A4: Tạo bảng 'eoi' nếu chưa tồn tại (Yêu cầu A3)
-$sql_create_table = "CREATE TABLE IF NOT EXISTS eoi (
-    EOInumber INT AUTO_INCREMENT PRIMARY KEY,
-    job_ref_num VARCHAR(10) NOT NULL,
-    first_name VARCHAR(20) NOT NULL,
-    last_name VARCHAR(20) NOT NULL,
-    dob DATE NOT NULL,
-    gender VARCHAR(10) NOT NULL,
-    street_address VARCHAR(40) NOT NULL,
-    suburb VARCHAR(40) NOT NULL,
-    state VARCHAR(5) NOT NULL,
-    postcode VARCHAR(4) NOT NULL,
-    email VARCHAR(100) NOT NULL,
-    phone VARCHAR(12) NOT NULL,
-    skills_list TEXT,
-    other_skills TEXT,
-    status ENUM('New', 'Current', 'Final') DEFAULT 'New'
-)";
+// // Yêu cầu A4: Tạo bảng 'eoi' nếu chưa tồn tại (Yêu cầu A3)
+// $sql_create_table = "CREATE TABLE IF NOT EXISTS eoi (
+//     EOInumber INT AUTO_INCREMENT PRIMARY KEY,
+//     job_ref_num VARCHAR(10) NOT NULL,
+//     first_name VARCHAR(20) NOT NULL,
+//     last_name VARCHAR(20) NOT NULL,
+//     dob DATE NOT NULL,
+//     gender VARCHAR(10) NOT NULL,
+//     street_address VARCHAR(40) NOT NULL,
+//     suburb VARCHAR(40) NOT NULL,
+//     state VARCHAR(5) NOT NULL,
+//     postcode VARCHAR(4) NOT NULL,
+//     email VARCHAR(100) NOT NULL,
+//     phone VARCHAR(12) NOT NULL,
+//     skills_list TEXT,
+//     other_skills TEXT,
+//     status ENUM('New', 'Current', 'Final') DEFAULT 'New'
+// )";
 
-if (!mysqli_query($conn, $sql_create_table)) {
-  echo "<p>Error creating table: " . mysqli_error($conn) . "</p>";
-  mysqli_close($conn);
-  exit();
-}
+// if (!mysqli_query($conn, $db)) {
+//   echo "<p>Error creating table: " . mysqli_error($conn) . "</p>";
+//   mysqli_close($conn);
+//   exit();
+// }
 
 // Chuẩn bị dữ liệu để insert (chuyển mảng skills thành chuỗi)
 $skills_string = implode(", ", $data['skills']);
