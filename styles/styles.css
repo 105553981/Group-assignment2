@@ -364,7 +364,7 @@ font, and spacing for both desktop and mobile. */
   display: flex;
   align-items: center;
   gap: 15px;
-  width: 2%;
+  width: 20%;
 }
 
 .appicons {
