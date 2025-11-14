@@ -2,22 +2,6 @@
 session_start();
 include("header.inc");
 require_once("settings.php");
-
-$conn = mysqli_connect($host, $user, $pass, $db);
-
-// Get form data
-$username = trim($_POST['username']);
-$password = trim($_POST['password']);
-// Insert user into the database
-$query = "INSERT INTO staff (username, password) VALUES ('$username', '$password')";
-$result = mysqli_query($conn, $query);
-
-if ($result) {
-  echo "✅ Signup successful. You can now <a href='sign_in.php'>login</a>.";
-} else {
-  echo "❌ Signup failed. Please try again.";
-}
-include("footer.inc");
 ?>
 
 
@@ -64,7 +48,7 @@ include("footer.inc");
         </div>
 
         <!-- Button -->
-        <input type="submit" id="submit-button" value="Sign up"
+        <input type="submit" name="submit" id="submit-button" value="Sign up"
           style="margin-left: 10px; padding-left: 90px; padding-right: 153px;">
         </div>
       </section>
@@ -77,3 +61,28 @@ include("footer.inc");
 </body>
 
 </html>
+
+
+<?php
+$conn = mysqli_connect($host, $user, $pass, $db);
+if (isset($_SESION["REQUEST_METHOD" == 'POST'])){
+  $username = trim($_POST['username']);
+  $password = trim($_POST['password']);
+  $query = "INSERT INTO staff (username, password) VALUES ('$username', '$password')";
+  $result = mysqli_query($conn, $query);
+}
+
+if ($result) {
+  echo
+  "<form>
+    <section class='apply-box'>✅ Signup successful. You can now <a href='sign_in.php'>login</a></section>
+  </form>";
+} else {
+  echo
+  "<form>
+    <section class='apply-box'>❌ Signup failed. Please try again.</a></section>
+  </form>";
+}
+
+include("footer.inc");
+?>
