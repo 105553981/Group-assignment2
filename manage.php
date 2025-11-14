@@ -24,42 +24,41 @@ require_once("settings.php"); // Cần để kết nối CSDL
 
     <form method="get" action="manage.php">
 
-      <legend class="highlight" style="font-size: 20px;"><strong>List All EOIs</strong></legend>
-      <p style="font-size:20px;">List all current Expressions of Interest.
-        <input type="submit" name="list_all" value="List All"
-          onmouseover="this.style.backgroundColor='green'; this.style.color='black';"
-          onmouseout="this.style.backgroundColor='black'; this.style.color='white';" style="padding-left: 10px; padding-right: 10px; background-color:black; color: white;
-    ">
-      </p>
+        <legend class="highlight" style="font-size: 20px;"><strong>List All EOIs</strong></legend>
+        <p style="font-size:20px;">List all current Expressions of Interest.
+          <input type="submit" name="list_all" value="List All"
+            onmouseover="this.style.backgroundColor='green'; this.style.color='black';"
+            onmouseout="this.style.backgroundColor='black'; this.style.color='white';" style="padding-left: 10px; padding-right: 10px; background-color:black; color: white;
+      ">
+        </p>
 
     </form>
     <hr class="end-line-heading">
 
     <form method="get" action="manage.php">
 
-      <legend class="highlight" style="font-size: 20px;"><strong>List by Job Reference</strong></legend>
-      <label for="job_ref_search">Job Reference Number:</label>
-      <input type="text" name="job_ref_search" id="job_ref_search">
-      <input type="submit" value="Search by Job Ref"
-        onmouseover="this.style.backgroundColor='green'; this.style.color='black';"
-        onmouseout="this.style.backgroundColor='black'; this.style.color='white';" style="padding-left: 10px; padding-right: 10px; background-color:black; color: white;>
+        <legend class="highlight" style="font-size: 20px;"><strong>List by Job Reference</strong></legend>
+        <label for="job_ref_search">Job Reference Number:</label>
+        <input type="text" name="job_ref_search" id="job_ref_search">
+        <input type="submit" value="Search by Job Ref"
+          onmouseover="this.style.backgroundColor='green'; this.style.color='black';"
+          onmouseout="this.style.backgroundColor='black'; this.style.color='white';" style="padding-left: 10px; padding-right: 10px; background-color:black; color: white;>
 
     </form>
     <hr class=" end-line-heading">
 
       <form method="get" action="manage.php">
+          <legend class="highlight" style="font-size: 20px;"><strong>List by Applicant Name</strong></legend>
+          <label for="first_name_search">First Name:</label>
+          <input type="text" name="first_name_search" id="first_name_search">
+          <label for="last_name_search">Last Name:</label>
+          <input type="text" name="last_name_search" id="last_name_search">
+          <p>(Leave one blank to search by first or last name only)</p>
+          <input type="submit" value="Search by Name"
+            onmouseover="this.style.backgroundColor='green'; this.style.color='black';"
+            onmouseout="this.style.backgroundColor='black'; this.style.color='white';" style="padding-left: 10px; padding-right: 10px; background-color:black; color: white;>
 
-        <legend class="highlight" style="font-size: 20px;"><strong>List by Applicant Name</strong></legend>
-        <label for="first_name_search">First Name:</label>
-        <input type="text" name="first_name_search" id="first_name_search">
-        <label for="last_name_search">Last Name:</label>
-        <input type="text" name="last_name_search" id="last_name_search">
-        <p>(Leave one blank to search by first or last name only)</p>
-        <input type="submit" value="Search by Name"
-          onmouseover="this.style.backgroundColor='green'; this.style.color='black';"
-          onmouseout="this.style.backgroundColor='black'; this.style.color='white';" style="padding-left: 10px; padding-right: 10px; background-color:black; color: white;>
-
-    </form>
+      </form>
     <hr class=" end-line-heading">
 
         <form method="post" action="manage.php">
@@ -101,7 +100,7 @@ require_once("settings.php"); // Cần để kết nối CSDL
           <div id="results-container" style="overflow-x: auto;">
             <?php
             // === LOGIC XỬ LÝ KẾT QUẢ TRUY VẤN SẼ NẰM Ở ĐÂY ===
-            
+
             $conn = @mysqli_connect($host, $user, $pass, $db);
             if ($conn) {
 
@@ -132,12 +131,90 @@ require_once("settings.php"); // Cần để kết nối CSDL
                 }
               }
 
+
+              // ----- Search by first name / last name -----
+              if (isset($_GET['first_name_search']) || isset($_GET['last_name_search'])) {
+
+                $first = trim($_GET['first_name_search']);
+                $last = trim($_GET['last_name_search']);
+
+                if ($first === '' && $last === '') {
+                  echo "<p>Please enter at least one name to search.</p>";
+                } else {
+                  // Tạo câu WHERE tùy theo user nhập gì
+                  $where = [];
+
+                  if ($first !== '') {
+                    $where[] = "first_name LIKE '%$first%'";
+                  }
+                  if ($last !== '') {
+                    $where[] = "last_name LIKE '%$last%'";
+                  }
+
+                  // Ghép điều kiện bằng AND (đúng yêu cầu)
+                  $where_sql = implode(" AND ", $where);
+
+                  $sql = "SELECT * FROM eoi WHERE $where_sql";
+
+                  $result = mysqli_query($conn, $sql);
+
+                  if ($result && mysqli_num_rows($result) > 0) {
+                    echo "<table border='1' style='width:100%; border-collapse:collapse;'>";
+                    echo "<tr><th>EOI</th><th>Job Ref</th><th>Name</th><th>Email</th><th>Phone</th><th>Status</th></tr>";
+
+                    while ($row = mysqli_fetch_assoc($result)) {
+                      echo "<tr>";
+                      echo "<td>{$row['EOInumber']}</td>";
+                      echo "<td>{$row['job_ref_num']}</td>";
+                      echo "<td>{$row['first_name']} {$row['last_name']}</td>";
+                      echo "<td>{$row['email']}</td>";
+                      echo "<td>{$row['phone']}</td>";
+                      echo "<td>{$row['status']}</td>";
+                      echo "</tr>";
+                    }
+
+                    echo "</table>";
+                  } else {
+                    echo "<p>No matching EOIs found.</p>";
+                  }
+                }
+              }
+              
+              // ----- Delete by Job Reference -----
+              if (isset($_POST['job_ref_delete'])) {
+
+                $delete_jrn = trim($_POST['job_ref_delete']);
+
+                if ($delete_jrn == '') {
+                  echo "<p>Please enter a Job Reference Number to delete.</p>";
+                } else {
+                  // Nếu job_ref_num là VARCHAR, để trong dấu nháy
+                  $sql = "DELETE FROM eoi WHERE job_ref_num = '$delete_jrn'";
+                  $result = mysqli_query($conn, $sql);
+
+                  if ($result) {
+                    $rows_deleted = mysqli_affected_rows($conn);
+
+                    if ($rows_deleted > 0) {
+                      echo "<p>Deleted $rows_deleted record(s) with Job Reference: $delete_jrn.</p>";
+                    } else {
+                      echo "<p>No records found with Job Reference: $delete_jrn.</p>";
+                    }
+                  } else {
+                    echo "<p>Error deleting records.</p>";
+                  }
+                }
+              }
+
+
+
+
               // (Bạn cần tự viết logic cho các form GET và POST khác:
               // - $_GET['job_ref_search']
               // - $_GET['first_name_search'] / $_GET['last_name_search'] (nhớ dùng LIKE %...%)
               // - $_POST['job_ref_delete'] (dùng DELETE FROM...)
               // - $_POST['eoi_num_update'] / $_POST['new_status'] (dùng UPDATE ... SET status = ? WHERE EOInumber = ?)
-            
+
               mysqli_close($conn);
             } else {
               echo "<p>Database connection failure.</p>";
