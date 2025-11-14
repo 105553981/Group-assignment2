@@ -7,14 +7,14 @@ require_once("settings.php");
   <h1 class="h1">HR Management Portal</h1>
   <form action="logout.php" method="post">
     <input type="submit" value="Logout" style="
-           margin-left: 46%;
-           padding: 25px;
-           margin-top: 30px;
-           font-size: 20px;
-           background-color: black;
-           color: white;
-           border-radius: 10px;
-           cursor: pointer;" onmouseover="this.style.backgroundColor='green'; this.style.color='black';"
+            margin-left: 46%;
+            padding: 25px;
+            margin-top: 30px;
+            font-size: 20px;
+            background-color: black;
+            color: white;
+            border-radius: 10px;
+            cursor: pointer;" onmouseover="this.style.backgroundColor='green'; this.style.color='black';"
       onmouseout="this.style.backgroundColor='black'; this.style.color='white';">
   </form>
 </section>
@@ -312,7 +312,7 @@ require_once("settings.php");
       // - $_GET['first_name_search'] / $_GET['last_name_search'] (nhớ dùng LIKE %...%)
       // - $_POST['job_ref_delete'] (dùng DELETE FROM...)
       // - $_POST['eoi_num_update'] / $_POST['new_status'] (dùng UPDATE ... SET status = ? WHERE EOInumber = ?)
-    
+
       mysqli_close($conn);
     } else {
       echo "<p>Database connection failure.</p>";
