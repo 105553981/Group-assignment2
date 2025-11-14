@@ -1,4 +1,5 @@
 <?php
+session_start();
 include("header.inc");
 require_once("settings.php");
 
