@@ -1,25 +1,30 @@
 <?php
-session_start();
 include("header.inc");
 require_once("settings.php");
 
+session_start(); // Bạn có thể cần thêm hàm này nếu chưa có trong header.inc
+
 $conn = mysqli_connect($host, $user, $pass, $db);
+$error_message = ""; // Khởi tạo biến thông báo lỗi
 
-// Get user input
-$username = trim($_POST['username']);
-$password = trim($_POST['password']);
+// Kiểm tra xem form đã được submit chưa
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+  // Get user input
+  $username = trim($_POST['username']);
+  $password = trim($_POST['password']);
 
-// Simple query to check credentials
-$query = "SELECT * FROM staff WHERE username = '$username' AND password = '$password'";
-$result = mysqli_query($conn, $query);
-$user = mysqli_fetch_assoc($result);
+  // Simple query to check credentials
+  $query = "SELECT * FROM staff WHERE username = '$username' AND password = '$password'";
+  $result = mysqli_query($conn, $query);
+  $user = mysqli_fetch_assoc($result);
 
-if ($user) {
-  $_SESSION['username'] = $user['username'];
-  header("Location: manage.php");
-  exit();
-} else {
-  echo "❌ Incorrect username or password.";
+  if ($user) {
+    $_SESSION['username'] = $user['username'];
+    header("Location: manage.php");
+    exit();
+  } else {
+    $error_message = "❌ Incorrect username or password. Please try again.";
+  }
 }
 ?>
 
