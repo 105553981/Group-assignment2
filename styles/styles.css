@@ -364,7 +364,7 @@ font, and spacing for both desktop and mobile. */
   display: flex;
   align-items: center;
   gap: 15px;
-  width: 20%;
+  width: 2%;
 }
 
 .appicons {
@@ -1009,4 +1009,26 @@ body {
 
 .manage_job_ref{
   display: flex;
+}
+.signup-box {
+  max-width: 900px;
+  padding: 30px;
+  background-color: #f5f2f2;
+  margin: 0 auto;
+  box-shadow: 5px 5px 5px rgba(1, 1, 1, 0.1);
+  border-radius: 20px;
+  position: relative;
+  top: 50px;
+}
+.signup-box input,
+.signup-box textarea,
+.signup-box select {
+  font-size: 18px;
+  margin: 5px;
+  margin-top: 10px;
+  border: 1px;
+  border-radius: 8px;
+  padding: 10px 0px;
+  width: auto;
+  padding-left: 5px;
 }

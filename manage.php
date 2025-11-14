@@ -65,12 +65,12 @@ require_once("settings.php"); // Cần để kết nối CSDL
         onmouseover="this.style.backgroundColor='green'; this.style.color='black';"
         onmouseout="this.style.backgroundColor='black'; this.style.color='white';"
         style="padding-left: 10px; padding-right: 10px; background-color:black; color: white;">
-
-
     </form>
+
+
     <hr class=" end-line-heading">
 
-    <form method="post" action="manage.php">
+    <form method="post" action="manage.php#delete">
 
       <legend class="highlight" style="font-size: 20px;"><strong>Delete by Job Reference</strong></legend>
       <label for="job_ref_delete">Job Reference Number:</label>
@@ -84,7 +84,7 @@ require_once("settings.php"); // Cần để kết nối CSDL
     </form>
     <hr class="end-line-heading">
 
-    <form method="post" action="manage.php">
+    <form method="post" action="manage.php#change">
 
       <legend class="highlight" style="font-size: 20px;"><strong>Change EOI Status</strong></legend>
       <label for="eoi_num_update">EOI Number:</label>
@@ -199,6 +199,8 @@ require_once("settings.php"); // Cần để kết nối CSDL
             }
           }
 
+
+
           // ----- Search by first name / last name -----
           if (isset($_GET['first_name_search']) || isset($_GET['last_name_search'])) {
 
@@ -207,9 +209,11 @@ require_once("settings.php"); // Cần để kết nối CSDL
             $last = trim($_GET['last_name_search']);
 
             echo "<a id='show-name'></a>";
-            // Nếu cả hai đều rỗng → khỏi chạy query
-            {
-              // Tạo câu WHERE tùy theo user nhập gì
+            // Check if the first or last variables are empty string.
+            if ($first === '' && $last === '') {
+              echo "<p style='font-size: 20px; color: red;'>Please enter at least one name to search.</p>";
+            } else {
+              // Create a "where" array
               $where = [];
 
               if ($first !== '') {
@@ -219,10 +223,10 @@ require_once("settings.php"); // Cần để kết nối CSDL
                 $where[] = "last_name LIKE '%$last%'";
               }
 
-              // Ghép điều kiện bằng AND (đúng yêu cầu)
+              // Combine conditions using "AND"
               $where_sql = implode(" AND ", $where);
 
-
+              // SQL command
               $sql = "SELECT * FROM eoi WHERE $where_sql";
 
               $result = mysqli_query($conn, $sql);
@@ -260,16 +264,22 @@ require_once("settings.php"); // Cần để kết nối CSDL
             }
           }
 
+
+
+
+
           if (isset($_POST['job_ref_delete'])) {
 
             $delete_jrn = trim($_POST['job_ref_delete']);
+            echo "<a id='delete'></a>";
 
             if ($delete_jrn === '') {
-              echo "<p>Please enter a Job Reference Number to delete.</p>";
+              echo "<p style ='font-size:20px; color:red;' >Please enter a Job Reference Number to delete.</p>";
             } else {
               // Nếu job_ref_num là VARCHAR, để trong dấu nháy
               $sql = "DELETE FROM eoi WHERE job_ref_num = '$delete_jrn'";
               $result = mysqli_query($conn, $sql);
+
 
               if ($result) {
                 $rows_deleted = mysqli_affected_rows($conn);
@@ -289,10 +299,10 @@ require_once("settings.php"); // Cần để kết nối CSDL
 
             $eoi_num = trim($_POST['eoi_num_update']);
             $new_status = trim($_POST['new_status']);
-
+            echo "<a id='change'></a>";
             // Check ô EOI number có nhập không
             if ($eoi_num === '') {
-              echo "<p>Please enter an EOI Number.</p>";
+              echo "<p style ='font-size:20px; color:red;'>Please enter an EOI Number.</p>";
             } else {
               // Tạo SQL update
               $sql = "UPDATE eoi SET status = '$new_status' WHERE EOInumber = '$eoi_num'";
@@ -312,17 +322,6 @@ require_once("settings.php"); // Cần để kết nối CSDL
             }
           }
 
-
-
-
-
-
-          // (Bạn cần tự viết logic cho các form GET và POST khác:
-          // - $_GET['job_ref_search']
-          // - $_GET['first_name_search'] / $_GET['last_name_search'] (nhớ dùng LIKE %...%)
-          // - $_POST['job_ref_delete'] (dùng DELETE FROM...)
-          // - $_POST['eoi_num_update'] / $_POST['new_status'] (dùng UPDATE ... SET status = ? WHERE EOInumber = ?)
-
           mysqli_close($conn);
         } else {
           echo "<p>Database connection failure.</p>";
@@ -333,5 +332,5 @@ require_once("settings.php"); // Cần để kết nối CSDL
 </section>
 
 <?php
-include_once("footer.inc"); // Thêm footer
+include_once("footer.inc");
 ?>
