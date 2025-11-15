@@ -150,7 +150,7 @@ require_once("settings.php");
           echo "</tbody></table>";
           mysqli_free_result($result);
         } else {
-          echo "<p>No EOIs found.</p>";
+          echo "<p style='font-size: 20px; color: red;'>No EOIs found.</p>";
         }
       }
       // Search using Job reference number
@@ -198,7 +198,7 @@ require_once("settings.php");
           echo "</tbody></table>";
 
         } else {
-          echo "<p>No applicants found for this job reference.</p>";
+          echo "<p style='font-size: 20px; color: red;'>No applicants found for this job reference.</p>";
         }
       }
 
@@ -263,7 +263,7 @@ require_once("settings.php");
 
             echo "</table>";
           } else {
-            echo "<p>No matching EOIs found.</p>";
+            echo "<p style='font-size: 20px; color: red;'>No matching EOIs found.</p>";
           }
         }
       }
@@ -287,7 +287,7 @@ require_once("settings.php");
               echo "<p style='font-size: 20px; color: red;'>No records found with Job Reference: $delete_jrn.</p>";
             }
           } else {
-            echo "<p style='font-size: 20px; color: red;>Error deleting records.</p>";
+            echo "<p style='font-size: 20px; color: red;'>Error deleting records.</p>";
           }
         }
       }
