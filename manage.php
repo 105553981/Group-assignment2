@@ -297,25 +297,30 @@ require_once("settings.php");
         $eoi_num = trim($_POST['eoi_num_update']);
         $new_status = trim($_POST['new_status']);
 
-        $query = "SELECT * FROM eoi WHERE eoinumber = $eoi_num";
 
-        $result = mysqli_query($conn, $query);
-        $row = mysqli_fetch_array($result);
-        $current_status = $row["status"];
+        $sql = "SELECT * FROM eoi WHERE EOInumber = '$eoi_num'";
 
-        echo $current_status;
-        echo "<br/>";
-        echo "eoi_num " . $eoi_num . "";
-        echo "" . $new_status . "";
+        if ($sql) {
+          $result = mysqli_query($conn, $sql);
+          $row = mysqli_fetch_assoc($result);
+        }
+
+        if ($row > 0){
+          $current_status = $row['status'];
+          }
+
 
         // Check if EOI number is empty
         if ($eoi_num === '') {
-          echo "FAIL";
-          echo "<p style='font-size: 20px; color: red;>Please enter an EOI Number.</p>";
-        } elseif ($new_status === $current_status) {
-          echo "FAIL SATATUS";
-          echo "<p style='font-size: 20px; color: red;>Please choose a different status</p>";
-        } else {
+          echo "<p>Please enter an EOI Number.</p>";
+        }
+        elseif (mysqli_num_rows($result) < 0) {
+        echo "<p>EOI Number not found.</p>";
+        }
+        elseif ($new_status === $current_status) {
+          echo "<p>Please choose a different status</p>";
+        }
+        else {
           // SQL command
           $sql = "UPDATE eoi SET status = '$new_status' WHERE EOInumber = '$eoi_num'";
           echo $sql;

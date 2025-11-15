@@ -662,7 +662,7 @@ tbody tr:hover {
 /* Apply Page */
 
 .apply-box {
-  max-width: 900px;
+  max-width: 1200px;
   padding: 30px;
   background-color: #f5f2f2;
   margin: 0 auto;
@@ -1013,4 +1013,3 @@ body {
 
 
 /* Sign in page */
-

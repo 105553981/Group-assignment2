@@ -30,6 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
   else {
     $error_message = "❌ Incorrect username or password. Please try again.";
+
   }
 }
 ?>
@@ -82,6 +83,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
           </div>
           <div class="form_image">
             <img src="images/admin.png" style="width: 60%; margin-left: 110px; margin-top: 58px;">
+            <!-- Image source: Image source: https://www.flaticon.com/free-icon/admin_2206368 -->
           </div>
         </div>
 
