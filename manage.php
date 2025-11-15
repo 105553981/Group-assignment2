@@ -302,6 +302,8 @@ require_once("settings.php");
     } else {
       echo "<p>Database connection failure.</p>";
     }
+``````}
+
     ?>
   </div>
 </div>
