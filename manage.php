@@ -173,10 +173,7 @@ require_once("settings.php");
             echo "<td>{$row['last_name']}</td>";
             echo "<td>{$row['email']}</td>";
             echo "<td>{$row['phone']}</td>";
-
-            // Hiển thị skill nếu có trong bảng
             echo "<td>{$row['skills']}</td>";
-
             echo "<td>{$row['status']}</td>";
             echo "</tr>";
           }
@@ -258,7 +255,6 @@ require_once("settings.php");
         if ($delete_jrn === '') {
           echo "<p>Please enter a Job Reference Number to delete.</p>";
         } else {
-          // Nếu job_ref_num là VARCHAR, để trong dấu nháy
           $sql = "DELETE FROM eoi WHERE job_ref_num = '$delete_jrn'";
           $result = mysqli_query($conn, $sql);
 
@@ -302,17 +298,6 @@ require_once("settings.php");
           }
         }
       }
-
-
-
-
-
-      // (Bạn cần tự viết logic cho các form GET và POST khác:
-      // - $_GET['job_ref_search']
-      // - $_GET['first_name_search'] / $_GET['last_name_search'] (nhớ dùng LIKE %...%)
-      // - $_POST['job_ref_delete'] (dùng DELETE FROM...)
-      // - $_POST['eoi_num_update'] / $_POST['new_status'] (dùng UPDATE ... SET status = ? WHERE EOInumber = ?)
-
       mysqli_close($conn);
     } else {
       echo "<p>Database connection failure.</p>";
@@ -323,5 +308,5 @@ require_once("settings.php");
 </section>
 
 <?php
-include_once("footer.inc"); // Thêm footer
+include_once("footer.inc");
 ?>
