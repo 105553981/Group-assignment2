@@ -277,10 +277,30 @@ require_once("settings.php");
         $eoi_num = trim($_POST['eoi_num_update']);
         $new_status = trim($_POST['new_status']);
 
+
+        $sql = "SELECT * FROM eoi WHERE EOInumber = '$eoi_num'";
+
+        if ($sql) {
+          $result = mysqli_query($conn, $sql);
+          $row = mysqli_fetch_assoc($result);
+        }
+
+        if ($row > 0){
+          $current_status = $row['status'];
+          }
+
+
         // Check if EOI number is empty
         if ($eoi_num === '') {
           echo "<p>Please enter an EOI Number.</p>";
-        } else {
+        }
+        elseif (mysqli_num_rows($result) < 0) {
+        echo "<p>EOI Number not found.</p>";
+        }
+        elseif ($new_status === $current_status) {
+          echo "<p>Please choose a different status</p>";
+        }
+        else {
           // SQL command
           $sql = "UPDATE eoi SET status = '$new_status' WHERE EOInumber = '$eoi_num'";
           $result = mysqli_query($conn, $sql);
