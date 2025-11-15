@@ -18,11 +18,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $result = mysqli_query($conn, $query);
   $user = mysqli_fetch_assoc($result);
 
-  if ($user) {
+  if ($username == "" || $password == "") {
+    $error_message = "❌ Missing username or password. Please try again.";
+  }
+
+  elseif($user) {
     $_SESSION['username'] = $user['username'];
     header("Location: manage.php");
     exit();
-  } else {
+  }
+
+  else {
     $error_message = "❌ Incorrect username or password. Please try again.";
   }
 }
@@ -52,6 +58,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
           <hr>
           <h3 id="header-text">Sign in Form</h3>
         </div>
+
+        <?php if (!empty($error_message)): ?>
+          <p
+            style="text-align: center; font-weight: bold; padding: 10px; color: <?php echo (strpos($error_message, '✅') !== false) ? 'green' : 'red'; ?>;">
+            <?php echo $error_message; ?>
+          </p>
+        <?php endif; ?>
+
         <hr style="margin-top: 20px;" ;>
         <div class="wrap_form" style="display: flex;">
           <!-- Username -->
