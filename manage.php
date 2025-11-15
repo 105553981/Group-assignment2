@@ -20,7 +20,7 @@ require_once("settings.php");
 </section>
 
 
-<div class="apply-box">
+<div class="apply-box" style="max-width: 1000px;">
   <h3 class="form-heading">Search & Manage EOIs</h3>
   <hr class="end-line-heading">
   <!--HTML of List all EOIs -->
@@ -81,7 +81,7 @@ require_once("settings.php");
   </form>
   <hr class="end-line-heading">
 
-  <form method="post" action="manage.php">
+  <form method="post" action="manage.php#change">
 
     <legend class="highlight" style="font-size: 20px;"><strong>Change EOI Status</strong></legend>
     <label for="eoi_num_update">EOI Number:</label>
@@ -101,7 +101,7 @@ require_once("settings.php");
   </form>
 </div>
 
-<div class="apply-box" style="margin-top: 30px;">
+<div class="apply-box" style="margin-top: 30px; max-width: 1000px; margin-bottom:40px;">
   <h3 class="form-heading">Query Results</h3>
   <hr class="end-line-heading">
   <div id="results-container" style="overflow-x: auto;">
@@ -119,16 +119,31 @@ require_once("settings.php");
         $result = mysqli_query($conn, $sql);
 
         if ($result && mysqli_num_rows($result) > 0) {
-          echo "<table border='1' style='width: 100%; border-collapse: collapse;'>";
-          echo "<thead><tr><th>EOI</th><th>Job Ref</th><th>Name</th><th>Email</th><th>Phone</th><th>Status</th></tr></thead>";
-          echo "<tbody>";
+          echo "<table border='1' style='width: 100%; border-collapse: collapse; text-align:center;'>";
+          echo "<thead>
+                <tr>
+                  <th>EOI</th>
+                  <th>Job Ref</th>
+                  <th>First Name</th>
+                  <th>Last Name</th>
+                  <th>Email</th>
+                  <th>Phone</th>
+                  <th>Skills</th>
+                  <th>Others</th>
+                  <th>Status</th>
+                </tr>
+              </thead><tbody>";
+          ;
           while ($row = mysqli_fetch_assoc($result)) {
             echo "<tr>";
             echo "<td>{$row['EOInumber']}</td>";
             echo "<td>{$row['job_ref_num']}</td>";
-            echo "<td>{$row['first_name']} {$row['last_name']}</td>";
+            echo "<td>{$row['first_name']}</td>";
+            echo "<td>{$row['last_name']}</td>";
             echo "<td>{$row['email']}</td>";
             echo "<td>{$row['phone']}</td>";
+            echo "<td>{$row['skills_list']}</td>";
+            echo "<td>{$row['other_skills']}</td>";
             echo "<td>{$row['status']}</td>";
             echo "</tr>";
           }
@@ -151,7 +166,7 @@ require_once("settings.php");
 
 
         if ($result && mysqli_num_rows($result) > 0) {
-          echo "<table border='1' style='width: 100%; border-collapse: collapse;'>";
+          echo "<table border='1' style='width: 100%; border-collapse: collapse; text-align:center'>";
           echo "<thead>
                 <tr>
                   <th>EOI</th>
@@ -161,6 +176,7 @@ require_once("settings.php");
                   <th>Email</th>
                   <th>Phone</th>
                   <th>Skills</th>
+                  <th>Others</th>
                   <th>Status</th>
                 </tr>
               </thead><tbody>";
@@ -173,7 +189,8 @@ require_once("settings.php");
             echo "<td>{$row['last_name']}</td>";
             echo "<td>{$row['email']}</td>";
             echo "<td>{$row['phone']}</td>";
-            echo "<td>{$row['skills']}</td>";
+            echo "<td>{$row['skills_list']}</td>";
+            echo "<td>{$row['other_skills']}</td>";
             echo "<td>{$row['status']}</td>";
             echo "</tr>";
           }
@@ -216,7 +233,7 @@ require_once("settings.php");
           $result = mysqli_query($conn, $sql);
 
           if ($result && mysqli_num_rows($result) > 0) {
-            echo "<table border='1' style='width: 100%; border-collapse: collapse;'>";
+            echo "<table border='1' style='width: 90%; border-collapse: collapse; text-align:center'>";
             echo "<thead>
                 <tr>
                   <th>EOI</th>
@@ -226,6 +243,7 @@ require_once("settings.php");
                   <th>Email</th>
                   <th>Phone</th>
                   <th>Skills</th>
+                  <th>Others</th>
                   <th>Status</th>
                 </tr>
               </thead><tbody>";
@@ -237,6 +255,8 @@ require_once("settings.php");
               echo "<td>{$row['first_name']} {$row['last_name']}</td>";
               echo "<td>{$row['email']}</td>";
               echo "<td>{$row['phone']}</td>";
+              echo "<td>{$row['skills_list']}</td>";
+              echo "<td>{$row['other_skills']}</td>";
               echo "<td>{$row['status']}</td>";
               echo "</tr>";
             }
@@ -253,7 +273,7 @@ require_once("settings.php");
         $delete_jrn = trim($_POST['job_ref_delete']);
         echo "<a id='delete'></a>";
         if ($delete_jrn === '') {
-          echo "<p>Please enter a Job Reference Number to delete.</p>";
+          echo "<p style='font-size: 20px; color: red;>Please enter a Job Reference Number to delete.</p>";
         } else {
           $sql = "DELETE FROM eoi WHERE job_ref_num = '$delete_jrn'";
           $result = mysqli_query($conn, $sql);
@@ -264,25 +284,41 @@ require_once("settings.php");
             if ($rows_deleted > 0) {
               echo "<p>Deleted $rows_deleted record(s) with Job Reference: $delete_jrn.</p>";
             } else {
-              echo "<p>No records found with Job Reference: $delete_jrn.</p>";
+              echo "<p style='font-size: 20px; color: red;>No records found with Job Reference: $delete_jrn.</p>";
             }
           } else {
-            echo "<p>Error deleting records.</p>";
+            echo "<p style='font-size: 20px; color: red;>Error deleting records.</p>";
           }
         }
       }
       // EOI update status Feature
       if (isset($_POST['eoi_num_update']) && isset($_POST['new_status'])) {
-
+        echo "<a id='change'></a>";
         $eoi_num = trim($_POST['eoi_num_update']);
         $new_status = trim($_POST['new_status']);
 
+        $query = "SELECT * FROM eoi WHERE eoinumber = $eoi_num";
+
+        $result = mysqli_query($conn, $query);
+        $row = mysqli_fetch_array($result);
+        $current_status = $row["status"];
+
+        echo $current_status;
+        echo "<br/>";
+        echo "eoi_num " . $eoi_num . "";
+        echo "" . $new_status . "";
+
         // Check if EOI number is empty
         if ($eoi_num === '') {
-          echo "<p>Please enter an EOI Number.</p>";
+          echo "FAIL";
+          echo "<p style='font-size: 20px; color: red;>Please enter an EOI Number.</p>";
+        } elseif ($new_status === $current_status) {
+          echo "FAIL SATATUS";
+          echo "<p style='font-size: 20px; color: red;>Please choose a different status</p>";
         } else {
           // SQL command
           $sql = "UPDATE eoi SET status = '$new_status' WHERE EOInumber = '$eoi_num'";
+          echo $sql;
           $result = mysqli_query($conn, $sql);
 
           if ($result) {
@@ -291,10 +327,11 @@ require_once("settings.php");
             if ($rows_updated > 0) {
               echo "<p>EOI #$eoi_num status updated to '$new_status'.</p>";
             } else {
-              echo "<p>No EOI found with number $eoi_num.</p>";
+              echo "<p style='font-size: 20px; color: red;>No EOI found with number $eoi_num.</p>";
             }
           } else {
-            echo "<p>Error updating EOI status.</p>";
+            echo "fail all";
+            echo "<p p style='font-size: 20px; color: red;>Error updating EOI status.</p>";
           }
         }
       }
@@ -302,8 +339,6 @@ require_once("settings.php");
     } else {
       echo "<p>Database connection failure.</p>";
     }
-``````}
-
     ?>
   </div>
 </div>
