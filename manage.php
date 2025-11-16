@@ -42,7 +42,7 @@ require_once("settings.php");
     <legend class="highlight" style="font-size: 20px;"><strong>List by Job Reference</strong></legend>
 
     <label for="job_ref_search">Job Reference Number:</label>
-    <input type="text" name="job_ref_search" id="job_ref_search">
+    <input type="text" name="job_ref_search" id="job_ref_search" required>
 
     <input type="submit" value="Search by Job Ref"
       style="padding-left:10px; padding-right:10px; background-color:black; color:white;"
@@ -158,6 +158,7 @@ require_once("settings.php");
         $job_ref = mysqli_real_escape_string($conn, $_GET['job_ref_search']);
 
         echo "<a id='show-job-ref'></a>";
+
         // SQL command
         $sql = "SELECT * FROM eoi WHERE job_ref_num = '$job_ref'";
         $result = mysqli_query($conn, $sql);

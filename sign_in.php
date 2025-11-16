@@ -14,24 +14,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $password = trim($_POST['password']);
 
 
-  $query = "SELECT * FROM staff WHERE username = '$username' AND password = '$password'";
-  $result = mysqli_query($conn, $query);
-  $user = mysqli_fetch_assoc($result);
-
   if ($username == "" || $password == "") {
     $error_message = "❌ Missing username or password. Please try again.";
   }
+  
+  $clean_username = mysqli_real_escape_string($conn, $username);
+  $query = "SELECT * FROM staff WHERE username='$clean_username'";
+  $result = mysqli_query($conn, $query);
+  $user = mysqli_fetch_assoc($result);
 
-  elseif($user) {
+
+  if ($user && password_verify($password, $user['password'])) {
     $_SESSION['username'] = $user['username'];
     header("Location: manage.php");
     exit();
-  }
-
-  else {
+  } else {
     $error_message = "❌ Incorrect username or password. Please try again.";
 
   }
+
 }
 ?>
 

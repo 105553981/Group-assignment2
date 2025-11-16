@@ -21,9 +21,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $clean_username = mysqli_real_escape_string($conn, $username);
     $clean_password = mysqli_real_escape_string($conn, $password);
+    $hash_password = password_hash($clean_password, PASSWORD_DEFAULT);
 
-
-    $query = "INSERT INTO staff (username, password) VALUES ('$clean_username', '$clean_password')";
+    $query = "INSERT INTO staff (username, password) VALUES ('$clean_username', '$hash_password')";
 
     $result = mysqli_query($conn, $query);
 
