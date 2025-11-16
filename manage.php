@@ -150,7 +150,7 @@ require_once("settings.php");
           echo "</tbody></table>";
           mysqli_free_result($result);
         } else {
-          echo "<p>No EOIs found.</p>";
+          echo "<p style='font-size: 20px; color: red;'>No EOIs found.</p>";
         }
       }
       // Search using Job reference number
@@ -199,7 +199,7 @@ require_once("settings.php");
           echo "</tbody></table>";
 
         } else {
-          echo "<p>No applicants found for this job reference.</p>";
+          echo "<p style='font-size: 20px; color: red;'>No applicants found for this job reference.</p>";
         }
       }
 
@@ -264,7 +264,7 @@ require_once("settings.php");
 
             echo "</table>";
           } else {
-            echo "<p>No matching EOIs found.</p>";
+            echo "<p style='font-size: 20px; color: red;'>No matching EOIs found.</p>";
           }
         }
       }
@@ -285,10 +285,10 @@ require_once("settings.php");
             if ($rows_deleted > 0) {
               echo "<p>Deleted $rows_deleted record(s) with Job Reference: $delete_jrn.</p>";
             } else {
-              echo "<p style='font-size: 20px; color: red;>No records found with Job Reference: $delete_jrn.</p>";
+              echo "<p style='font-size: 20px; color: red;'>No records found with Job Reference: $delete_jrn.</p>";
             }
           } else {
-            echo "<p style='font-size: 20px; color: red;>Error deleting records.</p>";
+            echo "<p style='font-size: 20px; color: red;'>Error deleting records.</p>";
           }
         }
       }
@@ -313,37 +313,32 @@ require_once("settings.php");
 
         // Check if EOI number is empty
         if ($eoi_num === '') {
-          echo "<p>Please enter an EOI Number.</p>";
-        }
-        elseif (mysqli_num_rows($result) < 0) {
-        echo "<p>EOI Number not found.</p>";
-        }
-        elseif ($new_status === $current_status) {
-          echo "<p>Please choose a different status</p>";
-        }
-        else {
+          echo "<p style='font-size: 20px; color: red;'>Please enter an EOI Number.</p>";
+        } elseif (mysqli_num_rows($result) < 0) {
+          echo "<p style='font-size: 20px; color: red;'>EOI Number not found.</p>";
+        } elseif ($new_status === $current_status) {
+          echo "<p style='font-size: 20px; color: red;'>Please choose a different status</p>";
+        } else {
           // SQL command
           $sql = "UPDATE eoi SET status = '$new_status' WHERE EOInumber = '$eoi_num'";
-          echo $sql;
           $result = mysqli_query($conn, $sql);
 
           if ($result) {
             $rows_updated = mysqli_affected_rows($conn);
 
             if ($rows_updated > 0) {
-              echo "<p>EOI #$eoi_num status updated to '$new_status'.</p>";
+              echo "<p style='font-size: 20px; color: green;'>EOI #$eoi_num status updated to '$new_status'.</p>";
             } else {
-              echo "<p style='font-size: 20px; color: red;>No EOI found with number $eoi_num.</p>";
+              echo "<p style='font-size: 20px; color: red;'>No EOI found with number $eoi_num.</p>";
             }
           } else {
-            echo "fail all";
-            echo "<p p style='font-size: 20px; color: red;>Error updating EOI status.</p>";
+            echo "<p style='font-size: 20px; color: red;'>Error updating EOI status.</p>";
           }
         }
       }
       mysqli_close($conn);
     } else {
-      echo "<p>Database connection failure.</p>";
+      echo "<pstyle='font-size: 20px; color: red;'>Database connection failure.</p>";
     }
     ?>
   </div>
