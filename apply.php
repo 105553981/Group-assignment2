@@ -31,7 +31,6 @@ function is_checked($field, $value)
   return '';
 }
 
-// Hàm trợ giúp để chọn select cũ
 function is_selected($field, $value)
 {
   global $old_data;
