@@ -30,7 +30,8 @@ include("header.inc");
   <section class="card-container">
     <div class="card">
       <p><strong class="highlight">1. Sort EOI Records by Selected Field</strong></p>
-      <p>
+      <div class="text-font-size">
+        <p>
         I added a feature that allows the manager to choose which field to sort EOI records
         when viewing them in <code>manage.php</code>. A dropdown menu was added with options such as
         First Name, Last Name, Job Reference Number, and Date Applied.
@@ -40,25 +41,30 @@ include("header.inc");
         accordingly using an <code>ORDER BY</code> SQL query.
         This enhancement improves usability by allowing easier navigation of large EOI lists.
       </p>
+      </div>
     </div>
 
     <div class="card">
       <p><strong class="highlight">2. Manager Registration Page with Server-Side Validation</strong></p>
+      <div class="text-font-size">
       <p>I created a new manager registration page (<code>sign_up.php</code>) with full server-side validation.
         The system ensures:</p>
       <ul>
         <li><strong>Unique username: </strong>Checked using a SELECT query before inserting.</li>
-        <li><strong>Password rule: </strong>Requires minimum 8 characters and at least one number.</li>
+        <li><strong>Password rule: </strong>Requires Maximum 20 characters.</li>
+        <li><strong>Password hash: </strong>Password hashed more secure </li>
       </ul>
       <p>
         Valid information is stored securely in the <code>staff</code> table.
         Passwords are hashed using <code>password_hash()</code> for security.
         This enhancement provides safe and controlled account creation for managers.
       </p>
+      </div>
     </div>
 
     <div class="card">
       <p><strong class="highlight">3. Access Control for manage.php</strong></p>
+      <div class="text-font-size">
       <p>I implemented a login system (<code>sign_in.php</code>) that checks the manager's username and
         hashed password before granting access to <code>manage.php</code>.
       </p>
@@ -67,6 +73,7 @@ include("header.inc");
         Sessions (<code>$_SESSION</code>) are used to maintain login state and prevent unauthorized access.
       </p>
       <p>This enhancement protects sensitive applicant data and meets industry security standards.</p>
+      </div>
     </div>
   </section>
 

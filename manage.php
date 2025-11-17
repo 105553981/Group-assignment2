@@ -1,5 +1,6 @@
 <?php
 session_start();
+session_start();
 $page_title = "Manage EOIs";
 include_once("header.inc");
 require_once("settings.php");

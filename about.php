@@ -40,14 +40,15 @@ include_once "header.inc"
         <dd>
           <ul>
             <li>
-              <strong>Nguyen Duc Phuc Thinh:</strong>
-              "Index.html, About.html and CSS Designer"
+              <strong>Nguyen Duc Phuc Thinh:</strong><br>
+              "Index.php, About.php, CSS Designer, Sign_up.php, Process_eoi.php, Manage.php"
             <br>
               Student ID: 105553981
             </li>
-            <li>
-              <strong>Nguyen Tang Nhat Hung:</strong>
-              "Apply.html and Job Script and its CSS "
+            <ul>
+              <li>
+              <strong>Nguyen Tang Nhat Hung:</strong><br>
+              "Apply.php and Jobs.php and its CSS, Sign_in.php, Process_eoi.php, Manage.php"
             <br>
               Student ID: 105707403
             </li>
