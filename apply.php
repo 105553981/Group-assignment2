@@ -1,29 +1,28 @@
 <?php
-session_start(); // Bắt đầu session để nhận lỗi (nếu có)
+session_start();
 $page_title = "Apply";
 include_once("header.inc");
 
-// Lấy lỗi và dữ liệu cũ từ session (nếu có)
+
 $errors = $_SESSION['errors'] ?? [];
 $old_data = $_SESSION['old_data'] ?? [];
 
-// Xóa session sau khi đã lấy
+
 unset($_SESSION['errors']);
 unset($_SESSION['old_data']);
 
-// Hàm trợ giúp để điền lại giá trị cũ
+
 function get_old($field)
 {
   global $old_data;
   return $old_data[$field] ?? '';
 }
 
-// Hàm trợ giúp để kiểm tra checkbox/radio cũ
 function is_checked($field, $value)
 {
   global $old_data;
   if (isset($old_data[$field])) {
-    // Xử lý cho radio/checkbox
+
     if (is_array($old_data[$field])) {
       return in_array($value, $old_data[$field]) ? 'checked' : '';
     }
@@ -98,21 +97,21 @@ function is_selected($field, $value)
           <input type="text" pattern="[a-zA-Z]+" name="last-name" id="last-name" maxlength="20" size="20" required
             title="Max 20 alpha characters" value="<?php echo get_old('last-name'); ?>">
         </p>
+        <p class="fill-info-container">
+          <label for="date-of-birth" class="highlight"><strong>Date of Birth</strong></label>
+          <input type="date" name="date-of-birth" id="date-of-birth" size="10"
+            value="<?php echo get_old('date-of-birth'); ?>">
+        </p>
       </div>
-      <p class="fill-info-container">
-        <label for="date-of-birth" class="highlight"><strong>Date of Birth</strong></label>
-        <input type="date" name="date-of-birth" id="date-of-birth" size="10"
-          value="<?php echo get_old('date-of-birth'); ?>">
-      </p>
       <div class="address">
         <p class="fill-info-container">
           <label for="address" class="highlight"><strong>Street Address</strong></label>
-          <input type="text" name="address" id="address" maxlength="40" size="20" required title="Max 40 characters"
+          <input type="text" name="address" id="address" maxlength="40" size="30" required title="Max 40 characters"
             value="<?php echo get_old('address'); ?>">
         </p>
         <p class="fill-info-container">
           <label for="suburb/town" class="highlight"><strong>Suburb/Town</strong></label>
-          <input type="text" name="suburb" id="suburb/town" maxlength="40" size="18" required title="Max 40 characters"
+          <input type="text" name="suburb" id="suburb/town" maxlength="40" size="30" required title="Max 40 characters"
             value="<?php echo get_old('suburb'); ?>">
         </p>
         <p class="fill-info-container">
@@ -132,7 +131,7 @@ function is_selected($field, $value)
         </p>
         <p class="fill-info-container">
           <label for="postcode" class="highlight"><strong>Postcode</strong></label>
-          <input type="text" pattern="[0-9]{4}" name="postcode" id="postcode" maxlength="4" size="6" required
+          <input type="text" pattern="[0-9]{4}" name="postcode" id="postcode" maxlength="4" size="11" required
             title="Exactly 4 digits" value="<?php echo get_old('postcode'); ?>">
         </p>
       </div>

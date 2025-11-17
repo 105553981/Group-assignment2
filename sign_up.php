@@ -21,20 +21,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $clean_username = mysqli_real_escape_string($conn, $username);
     $clean_password = mysqli_real_escape_string($conn, $password);
-    $hash_password = password_hash($clean_password, PASSWORD_DEFAULT);
 
-    $query = "INSERT INTO staff (username, password) VALUES ('$clean_username', '$hash_password')";
+    // Check if the username exists
+    $check_query = "SELECT * FROM staff WHERE username = '$clean_username'";
+    $check_result = mysqli_query($conn, $check_query);
 
-    $result = mysqli_query($conn, $query);
-
-    if ($result) {
-      $message = "✅ Signup successful. You can now <a href='sign_in.php'>login</a>.";
+    if (mysqli_num_rows($check_result) > 0) {
+      $message = "❌ Username already exists. Try another.";
     } else {
+      $hash_password = password_hash($clean_password, PASSWORD_DEFAULT);
+      $query = "INSERT INTO staff (username, password) VALUES ('$clean_username', '$hash_password')";
+      $result = mysqli_query($conn, $query);
 
-      $message = "❌ Signup failed. Error: " . mysqli_error($conn);
+      if ($result) {
+        $message = "✅ Signup successful. You can now <a href='sign_in.php'>login</a>.";
+      } else {
+        $message = "❌ Signup failed. This username is already taken.";
+      }
     }
   }
+
+
 }
+
 
 ?>
 

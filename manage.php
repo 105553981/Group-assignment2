@@ -2,6 +2,11 @@
 $page_title = "Manage EOIs";
 include_once("header.inc");
 require_once("settings.php");
+
+// if (!isset($_SESSION['username'])) {
+//   header("Location: sign_in.php");
+//   exit();
+// }
 ?>
 <section class="back-G">
   <h1 class="h1">HR Management Portal</h1>

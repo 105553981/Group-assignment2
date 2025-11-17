@@ -77,7 +77,6 @@ font, and spacing for both desktop and mobile. */
   font: normal bold 40px/1.5 "Verdana", sans-serif;
   text-align: center;
   color: rgb(30, 94, 30);
-
 }
 
 .hiring-container {
@@ -1007,9 +1006,23 @@ body {
   }
 }
 
-.manage_job_ref{
+.manage_job_ref {
   display: flex;
 }
 
 
-/* Sign in page */
+/* Enhancement page */
+
+.enhancement {
+  border: 1px solid #ccc;
+  padding: 15px;
+  margin-bottom: 25px;
+  border-radius: 6px;
+  background: #f9f9f9;
+}
+
+code {
+  background: #eee;
+  padding: 3px 5px;
+  border-radius: 4px;
+}

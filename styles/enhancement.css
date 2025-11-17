@@ -1,0 +1,138 @@
+/* --- General & Typography --- */
+body {
+  /* Using a clean, standard sans-serif font */
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+  background-color: #ffffff;
+  /* A very light gray background */
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+.main-title {
+  text-align: center;
+  margin-top: 40px;
+  color: #09801b;
+  font-size: 50px;
+}
+
+.benefit-heading h2 {
+  color: #000000;
+  /* Your original green color */
+  text-align: center;
+  font-weight: 1000;
+  /* A bit thinner for a modern feel */
+  font-size: 25px;
+  max-width: 800px;
+  margin: 20px auto 40px auto;
+  /* Centering the text block */
+}
+.img {
+  display: flex;
+  justify-content: space-around;
+}
+
+.banner1 {
+  margin-left: 100px;
+}
+
+.banner2 {
+  margin-right: 100px;
+}
+/* --- Card Layout --- */
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  /* Allows cards to wrap to the next line on small screens */
+  justify-content: center;
+  /* Centers the cards */
+
+  /* This is the modern way to add space between flex items.
+     It's much cleaner than using padding or margins on the items themselves. */
+  gap: 30px;
+
+  padding: 20px;
+  max-width: 1200px;
+  /* Limits the container width on very wide screens */
+  margin: 0 auto;
+  /* Centers the whole container */
+}
+
+/* --- Card Styling --- */
+.card {
+  background-color: #fff;
+  /* Clean white background */
+  border-radius: 12px;
+  /* Softer rounded corners */
+  padding: 25px 30px;
+
+  /* A softer, more modern shadow */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+
+  /* Cards will be at least 300px wide, but can grow.
+     This replaces your fixed 'width: 30%' */
+  flex-basis: 300px;
+  flex-grow: 1;
+  max-width: 380px;
+  /* Prevents cards from getting too wide */
+
+  /* This makes the hover effect smooth */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  /* Centered text is harder to read in paragraphs. Left-align is better. */
+  text-align: left;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  /* Lifts the card up slightly */
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  /* A stronger shadow on hover */
+}
+
+.card .highlight {
+  color: #008f4c;
+  /* Use your green for card titles */
+  font-size: 1.2em;
+  margin-bottom: 15px;
+}
+
+.card ul {
+  /* Restores the default list style, which is good for lists! */
+  list-style-type: disc;
+  padding-left: 20px;
+}
+
+.card li {
+  margin-bottom: 8px;
+}
+
+/* Style for <code> elements */
+.card code {
+  background-color: #eef1f3;
+  padding: 3px 6px;
+  border-radius: 4px;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 0.9em;
+}
+
+
+/* --- Responsive Design --- */
+/* This "media query" applies styles ONLY when the screen is 768px or smaller */
+@media (max-width: 768px) {
+  .card-container {
+    /* On mobile, we stack the cards vertically */
+    flex-direction: column;
+    align-items: center;
+    /* Center the stack */
+    gap: 25px;
+  }
+
+  .card {
+    /* Allow cards to take up most of the screen width */
+    width: 90%;
+    max-width: 500px;
+    /* But not get *too* wide */
+  }
+}

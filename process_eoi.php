@@ -2,20 +2,20 @@
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-session_start(); // Bắt đầu session để gửi lỗi về apply.php
+session_start();
 
-// Yêu cầu A4: Không cho phép truy cập trực tiếp
+
 if ($_SERVER["REQUEST_METHOD"] != "POST") {
   header("Location: apply.php");
   exit();
 }
 
-require_once("settings.php"); // Chứa thông tin CSDL
+require_once("settings.php");
 
-$errors = []; // Mảng chứa lỗi
-$data = []; // Mảng chứa dữ liệu đã làm sạch
+$errors = [];
+$data = [];
 
-// === HÀM LÀM SẠCH DỮ LIỆU (Yêu cầu A4) ===
+
 function sanitize_input($data)
 {
   $data = trim($data);
@@ -24,8 +24,8 @@ function sanitize_input($data)
   return $data;
 }
 
-// === HÀM VALIDATE POSTCODE VÀ STATE (Yêu cầu A4) ===
-function validate_postcode($state, $postcode)
+
+function validate_postcode($state, $postcode): bool|int
 {
   switch ($state) {
     case 'VIC':
@@ -49,11 +49,10 @@ function validate_postcode($state, $postcode)
   }
 }
 
-// === BẮT ĐẦU VALIDATION (Yêu cầu A4) ===
 
 // 1. Job Reference Number
 $data['ref-number'] = sanitize_input($_POST['ref-number'] ?? '');
-if (empty($data['ref-number']) || $data['ref-number'] == 'select') {
+if ($data['ref-number'] == 'select') {
   $errors[] = "You must select a Job Reference Number.";
 }
 
@@ -78,7 +77,6 @@ $data['date-of-birth'] = sanitize_input($_POST['date-of-birth'] ?? '');
 if (empty($data['date-of-birth'])) {
   $errors[] = "Date of Birth is required.";
 } else {
-  // Kiểm tra tuổi (ví dụ: phải từ 15 đến 80 tuổi)
   $dob = new DateTime($data['date-of-birth']);
   $now = new DateTime();
   $age = $now->diff($dob)->y;
@@ -152,7 +150,7 @@ if (empty($data['skills'])) {
   $errors[] = "You must select at least one skill other skills.";
 }
 
-// === KẾT THÚC VALIDATION ===
+
 
 // Nếu có lỗi, quay lại trang apply
 if (!empty($errors)) {
@@ -173,30 +171,29 @@ if (!$conn) {
   exit();
 }
 
-// // Yêu cầu A4: Tạo bảng 'eoi' nếu chưa tồn tại (Yêu cầu A3)
-// $sql_create_table = "CREATE TABLE IF NOT EXISTS eoi (
-//     EOInumber INT AUTO_INCREMENT PRIMARY KEY,
-//     job_ref_num VARCHAR(10) NOT NULL,
-//     first_name VARCHAR(20) NOT NULL,
-//     last_name VARCHAR(20) NOT NULL,
-//     dob DATE NOT NULL,
-//     gender VARCHAR(10) NOT NULL,
-//     street_address VARCHAR(40) NOT NULL,
-//     suburb VARCHAR(40) NOT NULL,
-//     state VARCHAR(5) NOT NULL,
-//     postcode VARCHAR(4) NOT NULL,
-//     email VARCHAR(100) NOT NULL,
-//     phone VARCHAR(12) NOT NULL,
-//     skills_list TEXT,
-//     other_skills TEXT,
-//     status ENUM('New', 'Current', 'Final') DEFAULT 'New'
-// )";
+$sql_create_table = "CREATE TABLE IF NOT EXISTS eoi (
+    EOInumber INT AUTO_INCREMENT PRIMARY KEY,
+    job_ref_num VARCHAR(10) NOT NULL,
+    first_name VARCHAR(20) NOT NULL,
+    last_name VARCHAR(20) NOT NULL,
+    dob DATE NOT NULL,
+    gender VARCHAR(10) NOT NULL,
+    street_address VARCHAR(40) NOT NULL,
+    suburb VARCHAR(40) NOT NULL,
+    state VARCHAR(5) NOT NULL,
+    postcode VARCHAR(4) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    phone VARCHAR(12) NOT NULL,
+    skills_list TEXT,
+    other_skills TEXT,
+    status ENUM('New', 'Current', 'Final') DEFAULT 'New'
+)";
 
-// if (!mysqli_query($conn, $db)) {
-//   echo "<p>Error creating table: " . mysqli_error($conn) . "</p>";
-//   mysqli_close($conn);
-//   exit();
-// }
+if (!mysqli_query($conn, $db)) {
+  echo "<p>Error creating table: " . mysqli_error($conn) . "</p>";
+  mysqli_close($conn);
+  exit();
+}
 
 // Chuẩn bị dữ liệu để insert (chuyển mảng skills thành chuỗi)
 $skills_string = implode(", ", $data['skills']);
