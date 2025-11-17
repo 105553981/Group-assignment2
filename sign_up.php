@@ -34,7 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       $result = mysqli_query($conn, $query);
 
       if ($result) {
-        $message = "✅ Signup successful. You can now <a href='sign_in.php'>login</a>.";
+        $message = "✅ Signup successfully. You can now <a href='sign_in.php'>login</a>.";
       } else {
         $message = "❌ Signup failed. This username is already taken.";
       }
@@ -91,13 +91,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
               maxlength="20" size="30" required>
           </div>
           <div class="form_image">
-            <img src="images/admin.png" style="width: 60%; margin-left: 110px; margin-top: 58px;">
+            <img src="images/admin.png" style="width: 50%; margin-left: 200px; margin-top: 90px;">
             <!-- Image source: https://www.flaticon.com/free-icon/admin_2206368 -->
           </div>
         </div>
 
         <input type="submit" id="submit-button" value="Sign up"
-          style="margin-left: 10px; padding-left: 90px; padding-right: 153px;">
+          style="margin-left: 10px; padding-left: 120px; padding-right: 210px; margin-top: -200px;">
         </div>
       </section>
     </section>

@@ -24,7 +24,7 @@
         <li><a href="about.php" class="navbar-item <?php echo ($current_page == 'about.php') ? 'active' : ''; ?>">About</a></li>
         <li><a href="apply.php" class="navbar-item <?php echo ($current_page == 'apply.php') ? 'active' : ''; ?>">Apply</a></li>
         <li><a href="jobs.php" class="navbar-item <?php echo ($current_page == 'jobs.php') ? 'active' : ''; ?>">Job Descriptions</a></li>
-        <li><a href="enhancement.php" class="navbar-item">Enhancement</a></li>
+        <li><a href="enhancements.php" class="navbar-item">Enhancements</a></li>
       </ul>
     </nav>
   </header>

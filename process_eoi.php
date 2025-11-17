@@ -189,7 +189,7 @@ $sql_create_table = "CREATE TABLE IF NOT EXISTS eoi (
     status ENUM('New', 'Current', 'Final') DEFAULT 'New'
 )";
 
-if (!mysqli_query($conn, $db)) {
+if (!mysqli_query($conn, $sql_create_table)) {
   echo "<p>Error creating table: " . mysqli_error($conn) . "</p>";
   mysqli_close($conn);
   exit();

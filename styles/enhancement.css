@@ -136,3 +136,9 @@ body {
     /* But not get *too* wide */
   }
 }
+.card .text-font-size p{
+  font-size: 20px;
+}
+.card .text-font-size ul{
+  font-size: 18px;
+}
