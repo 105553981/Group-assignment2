@@ -53,7 +53,7 @@ function validate_postcode($state, $postcode)
 
 // 1. Job Reference Number
 $data['ref-number'] = sanitize_input($_POST['ref-number'] ?? '');
-if (empty($data['ref-number']) || $data['ref-number'] == 'select') {
+if ($data['ref-number'] == 'select') {
   $errors[] = "You must select a Job Reference Number.";
 }
 

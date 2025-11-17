@@ -1,29 +1,28 @@
 <?php
-session_start(); // Bắt đầu session để nhận lỗi (nếu có)
+session_start();
 $page_title = "Apply";
 include_once("header.inc");
 
-// Lấy lỗi và dữ liệu cũ từ session (nếu có)
+
 $errors = $_SESSION['errors'] ?? [];
 $old_data = $_SESSION['old_data'] ?? [];
 
-// Xóa session sau khi đã lấy
+
 unset($_SESSION['errors']);
 unset($_SESSION['old_data']);
 
-// Hàm trợ giúp để điền lại giá trị cũ
+
 function get_old($field)
 {
   global $old_data;
   return $old_data[$field] ?? '';
 }
 
-// Hàm trợ giúp để kiểm tra checkbox/radio cũ
 function is_checked($field, $value)
 {
   global $old_data;
   if (isset($old_data[$field])) {
-    // Xử lý cho radio/checkbox
+
     if (is_array($old_data[$field])) {
       return in_array($value, $old_data[$field]) ? 'checked' : '';
     }
@@ -32,7 +31,6 @@ function is_checked($field, $value)
   return '';
 }
 
-// Hàm trợ giúp để chọn select cũ
 function is_selected($field, $value)
 {
   global $old_data;

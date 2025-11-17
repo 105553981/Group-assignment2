@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   if ($username == "" || $password == "") {
     $error_message = "❌ Missing username or password. Please try again.";
   }
-  
+
   $clean_username = mysqli_real_escape_string($conn, $username);
   $query = "SELECT * FROM staff WHERE username='$clean_username'";
   $result = mysqli_query($conn, $query);
