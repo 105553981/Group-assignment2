@@ -188,8 +188,9 @@ $sql_create_table = "CREATE TABLE IF NOT EXISTS eoi (
     other_skills TEXT,
     status ENUM('New', 'Current', 'Final') DEFAULT 'New'
 )";
+$result_insertTable = mysqli_query($conn, $sql_create_table);
 
-if (!mysqli_query($conn, $db)) {
+if (!$result_insertTable) {
   echo "<p>Error creating table: " . mysqli_error($conn) . "</p>";
   mysqli_close($conn);
   exit();
@@ -197,7 +198,7 @@ if (!mysqli_query($conn, $db)) {
 
 // Chuẩn bị dữ liệu để insert (chuyển mảng skills thành chuỗi)
 $skills_string = implode(", ", $data['skills']);
-$dob_sql_format = $data['date-of-birth']; // HTML date type đã là YYYY-MM-DD
+$dob_sql_format = $data['date-of-birth'];
 
 // Sử dụng Prepared Statements để chống SQL Injection
 $sql_insert = "INSERT INTO eoi (job_ref_num, first_name, last_name, dob, gender, street_address, suburb, state, postcode, email, phone, skills_list, other_skills, status)

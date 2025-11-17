@@ -182,7 +182,8 @@ include_once "header.inc"
     <div class="contact">
       <h2>Contact with us at:</h2>
       <p>
-        <a href="mailto:105707403@student.swin.edu.au">105707403@student.swin.edu.au</a>
+        <a href="mailto:105707403@student.swin.edu.au">105707403@student.swin.edu.au</a><br>  
+        <a href="mailto:105553981@student.swin.edu.au">105553981@student.swin.edu.au</a>
       </p>
     </div>
   </div>

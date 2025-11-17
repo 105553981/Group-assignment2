@@ -25,16 +25,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Check if the username exists
     $check_query = "SELECT * FROM staff WHERE username = '$clean_username'";
     $check_result = mysqli_query($conn, $check_query);
-
+    // if records (username) already exist:
     if (mysqli_num_rows($check_result) > 0) {
       $message = "❌ Username already exists. Try another.";
     } else {
       $hash_password = password_hash($clean_password, PASSWORD_DEFAULT);
       $query = "INSERT INTO staff (username, password) VALUES ('$clean_username', '$hash_password')";
       $result = mysqli_query($conn, $query);
-
+      // if result is TRUE (it's successfully insert)
       if ($result) {
-        $message = "✅ Signup successful. You can now <a href='sign_in.php'>login</a>.";
+        $message = "✅ Signup successfully. You can now <a href='sign_in.php'>login</a>.";
       } else {
         $message = "❌ Signup failed. This username is already taken.";
       }
